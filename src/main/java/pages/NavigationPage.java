@@ -21,6 +21,7 @@ public class NavigationPage extends BasePage {
     public void clickRamadanIcon() {
         page.locator(ramadanIconSelector).click();
         page.waitForLoadState(LoadState.DOMCONTENTLOADED);
+
     }
 
     public void clickMainCTA() {

@@ -3,9 +3,9 @@ package pages;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
-public class MobileViewPage extends BasePage {
+public class WebResponsivePage extends BasePage {
 
-    public MobileViewPage(Page page) {
+    public WebResponsivePage(Page page) {
         super(page);
     }
 

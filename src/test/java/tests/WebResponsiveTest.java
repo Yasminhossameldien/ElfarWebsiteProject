@@ -3,11 +3,11 @@ package tests;
 import com.microsoft.playwright.*;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pages.MobileViewPage;
+import pages.WebResponsivePage;
 
-public class MobileViewTest extends BaseTest {
+public class WebResponsiveTest extends BaseTest {
 
-    private MobileViewPage mobileView;
+    private WebResponsivePage mobileView;
 
     @BeforeMethod
     public void setupMobileContext() {
@@ -18,7 +18,7 @@ public class MobileViewTest extends BaseTest {
                 .setHasTouch(true));
 
         page = context.newPage();
-        mobileView = new MobileViewPage(page);
+        mobileView = new WebResponsivePage(page);
     }
 
     @Test
@@ -31,6 +31,6 @@ public class MobileViewTest extends BaseTest {
         Assert.assertTrue(mobileView.areVisibleElementsDisplayed("button"), "Visible buttons error!");
         Assert.assertTrue(mobileView.areVisibleElementsDisplayed("img"), "Visible images error!");
 
-        mobileView.takeScreenshot("iPhone11_Final_Design_Check");
+        mobileView.takeScreenshot("WebResponsive_Check");
     }
 }
