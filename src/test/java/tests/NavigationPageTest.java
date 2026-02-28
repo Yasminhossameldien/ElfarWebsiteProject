@@ -18,7 +18,7 @@ public class NavigationPageTest extends BaseTest {
     }
 
     @Test
-    public void testWishlistLoginValidation() {
+    public void testNavigationAndCtaValidation() {
         SoftAssert softAssert = new SoftAssert();
 
         navigationPage.navigateToHomePage();
