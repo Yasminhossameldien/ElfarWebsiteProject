@@ -6,7 +6,7 @@ import org.testng.asserts.SoftAssert;
 import pages.NavigationPage;
 import com.microsoft.playwright.Browser;
 
-public class NavigationPageTest extends BaseTest {
+public class HomeNavigationTest  extends BaseTest {
 
     private NavigationPage navigationPage;
 

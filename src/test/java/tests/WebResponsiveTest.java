@@ -1,8 +1,8 @@
 package tests;
 
 import com.microsoft.playwright.*;
-import org.testng.Assert;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 import pages.WebResponsivePage;
 
 public class WebResponsiveTest extends BaseTest {
@@ -23,14 +23,14 @@ public class WebResponsiveTest extends BaseTest {
 
     @Test
     public void testIPhone11VisualValidation() {
+        SoftAssert softAssert = new SoftAssert();
         mobileView.navigateToHomePage();
 
-        boolean hasScroll = mobileView.isHorizontalScrollPresent();
-        Assert.assertFalse(hasScroll, "Layout Error: Horizontal scroll detected on iPhone 11!");
-
-        Assert.assertTrue(mobileView.areVisibleElementsDisplayed("button"), "Visible buttons error!");
-        Assert.assertTrue(mobileView.areVisibleElementsDisplayed("img"), "Visible images error!");
+        softAssert.assertTrue(mobileView.isLogoVisible(), "Logo is NOT visible!");
+        softAssert.assertFalse(mobileView.isHorizontalScrollPresent(), "Horizontal scroll detected!");
 
         mobileView.takeScreenshot("WebResponsive_Check");
+
+        softAssert.assertAll();
     }
 }

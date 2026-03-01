@@ -31,10 +31,9 @@ public class BaseTest {
                 byte[] screenshot = page.screenshot(new Page.ScreenshotOptions().setFullPage(true));
                 Allure.addAttachment("Final Screenshot - " + status, new ByteArrayInputStream(screenshot));
             } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Screenshot Error: " + e.getMessage());
             }
         }
-
         if (page != null) page.close();
         if (context != null) context.close();
     }
