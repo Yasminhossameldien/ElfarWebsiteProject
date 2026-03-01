@@ -2,7 +2,9 @@ package pages;
 
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
+
 import java.nio.file.Paths;
+
 
 public class BasePage {
     protected Page page;
@@ -21,6 +23,9 @@ public class BasePage {
                 .setPath(Paths.get(path))
                 .setFullPage(true));
     }
+
+
+
 
     public String getCurrentUrl() {
         return page.url();

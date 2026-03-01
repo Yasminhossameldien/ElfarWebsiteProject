@@ -19,6 +19,20 @@ public class GoogleSearchPage extends BasePage {
     public void searchFor(String query) {
         page.locator(searchFieldSelector).fill(query);
         page.keyboard().press("Enter");
+        page.waitForLoadState(LoadState.DOMCONTENTLOADED);
+    }
+    public String getPageTitle(String expectedText) {
+        page.waitForFunction("document.title.toLowerCase().includes('" + expectedText.toLowerCase() + "')");
+        return page.title();
+    }
+
+    public boolean isOfficialResultVisible() {
+        try {
+            page.locator(officialResultSelector).first().waitFor();
+            return page.locator(officialResultSelector).first().isVisible();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void clickOfficialResult() {

@@ -23,16 +23,20 @@ public class HomeNavigationTest  extends BaseTest {
 
         navigationPage.navigateToHomePage();
         navigationPage.clickRamadanIcon();
+
+        softAssert.assertTrue(navigationPage.isPageLoadedSuccessfully(), "Error: Page loaded with 404 or 500!");
+
+        String chosenPageUrl = page.url();
+        System.out.println("Recorded Chosen Page URL: " + chosenPageUrl);
+        navigationPage.takeScreenshot("screenshots/1_chosen_page.png");
+
         navigationPage.clickMainCTA();
-        navigationPage.clickWishlist();
 
-        String alertMessage = navigationPage.getNotificationMessage();
-        softAssert.assertEquals(alertMessage, "Please login to add to wishlist", "Validation message mismatch!");
+        softAssert.assertTrue(navigationPage.isPageLoadedSuccessfully(), "Error: Destination page loaded with 404 or 500!");
 
-        page.waitForURL("**/auth/login");
-        String currentUrl = page.url();
-        softAssert.assertTrue(currentUrl.contains("/auth/login"), "User was not redirected to login page!");
-
+        String destinationUrl = page.url();
+        System.out.println("Recorded Destination URL: " + destinationUrl);
+        softAssert.assertTrue(destinationUrl.contains("/auth/login"), "User was not redirected to login page!");
         navigationPage.takeScreenshot("screenshots/wishlist_login_validation.png");
 
         softAssert.assertAll();

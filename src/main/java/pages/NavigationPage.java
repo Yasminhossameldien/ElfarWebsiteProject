@@ -6,9 +6,9 @@ import com.microsoft.playwright.options.LoadState;
 
 public class NavigationPage extends BasePage {
     private final String ramadanIconSelector = "img[alt='Ramadan']";
-    private final String mainCTASelector = "img.card_productCardImg__2sum2";
-    private final String wishlistIconSelector = "img[alt='heart']";
-    private final String loginNotificationSelector = ".ant-notification-notice-message";
+    private final String mainCTASelector = "img[alt='wishlist-Icon']";
+
+
 
     public NavigationPage(Page page) {
         super(page);
@@ -24,18 +24,18 @@ public class NavigationPage extends BasePage {
 
     }
 
+    public boolean isPageLoadedSuccessfully() {
+        String pageText = page.locator("body").innerText();
+        return !pageText.contains("404") && !pageText.contains("500") && !pageText.contains("Not Found");
+    }
+
     public void clickMainCTA() {
-        page.locator(mainCTASelector).first().click();
+        Locator mainCTA = page.locator(mainCTASelector).first();
+        mainCTA.waitFor();
+        mainCTA.click();
     }
 
-    public void clickWishlist() {
-        page.locator(wishlistIconSelector).first().click();
-    }
 
-    public String getNotificationMessage() {
-        page.locator(loginNotificationSelector).waitFor();
-        return page.locator(loginNotificationSelector).innerText();
-    }
 
     public boolean isDestinationLoaded() {
         return page.isVisible("button") || page.locator("h1").isVisible();
