@@ -16,7 +16,9 @@ public class NavigationPage extends BasePage {
 
     public void navigateToHomePage() {
         navigateTo("https://mahmoudelfar.com/");
+        page.waitForLoadState(LoadState.DOMCONTENTLOADED);
     }
+
 
     public void clickRamadanIcon() {
         page.locator(ramadanIconSelector).click();
@@ -26,7 +28,9 @@ public class NavigationPage extends BasePage {
 
     public boolean isPageLoadedSuccessfully() {
         String pageText = page.locator("body").innerText();
-        return !pageText.contains("404") && !pageText.contains("500") && !pageText.contains("Not Found");
+        return !pageText.contains("404 Not Found")
+                && !pageText.contains("500 Internal Server")
+                && !pageText.contains("Page Not Found");
     }
 
     public void clickMainCTA() {

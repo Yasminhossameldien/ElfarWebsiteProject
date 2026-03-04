@@ -33,8 +33,8 @@ public class BaseTest {
             } catch (Exception e) {
                 System.out.println("Screenshot Error: " + e.getMessage());
             }
+            page.close();
         }
-        if (page != null) page.close();
         if (context != null) context.close();
     }
 

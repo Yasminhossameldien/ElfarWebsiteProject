@@ -26,6 +26,7 @@ public class HomeNavigationTest  extends BaseTest {
 
         softAssert.assertTrue(navigationPage.isPageLoadedSuccessfully(), "Error: Page loaded with 404 or 500!");
 
+
         String chosenPageUrl = page.url();
         System.out.println("Recorded Chosen Page URL: " + chosenPageUrl);
         navigationPage.takeScreenshot("screenshots/1_chosen_page.png");

@@ -2,6 +2,8 @@ package pages;
 
 import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Page;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImageCheck extends BasePage {
@@ -21,17 +23,31 @@ public class ImageCheck extends BasePage {
         }
     }
 
-    public int getBrokenImagesCount() {
+    public List<String> getBrokenImagesInfo() {
         List<ElementHandle> images = page.querySelectorAll("img");
-        int brokenCount = 0;
+        List<String> brokenImages = new ArrayList<>();
+
         for (ElementHandle img : images) {
-            Boolean isLoaded = (Boolean) img.evaluate(
-                    "img => img.complete && typeof img.naturalWidth != 'undefined' && img.naturalWidth > 0"
-            );
-            if (!isLoaded) {
-                brokenCount++;
+            try {
+                page.waitForFunction("img => img.complete", img);
+
+                Boolean isLoaded = (Boolean) img.evaluate(
+                        "img => img.complete && typeof img.naturalWidth != 'undefined' && img.naturalWidth > 0"
+                );
+
+                if (!isLoaded) {
+                    String src = (String) img.getAttribute("src");
+                    brokenImages.add(src != null ? src : "Empty Source");
+                }
+            } catch (Exception e) {
+                String src = (String) img.getAttribute("src");
+                brokenImages.add(src);
             }
         }
-        return brokenCount;
+
+        System.out.println("Broken Images Count: " + brokenImages.size());
+        brokenImages.forEach(System.out::println);
+
+        return brokenImages;
     }
 }

@@ -2,7 +2,9 @@ package pages;
 
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
+import io.qameta.allure.Allure;
 
+import java.io.ByteArrayInputStream;
 import java.nio.file.Paths;
 
 
@@ -18,14 +20,11 @@ public class BasePage {
         page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
-    public void takeScreenshot(String path) {
-        page.screenshot(new Page.ScreenshotOptions()
-                .setPath(Paths.get(path))
-                .setFullPage(true));
+    public void takeScreenshot(String name) {
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+        byte[] screenshot = page.screenshot(new Page.ScreenshotOptions().setFullPage(true));
+        Allure.addAttachment(name, new ByteArrayInputStream(screenshot));
     }
-
-
-
 
     public String getCurrentUrl() {
         return page.url();

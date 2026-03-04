@@ -7,6 +7,8 @@ import pages.GoogleSearchPage;
 import pages.ImageCheck;
 import com.microsoft.playwright.Browser;
 
+import java.util.List;
+
 public class HomePageTest extends BaseTest {
 
     private GoogleSearchPage googleSearchPage;
@@ -59,8 +61,10 @@ public class HomePageTest extends BaseTest {
         imageCheck.navigateToHomePage();
         imageCheck.scrollGradually();
 
-        int brokenImages = imageCheck.getBrokenImagesCount();
-        Assert.assertEquals(brokenImages, 0, "Found " + brokenImages + " broken images!");
+        List<String> brokenImages = imageCheck.getBrokenImagesInfo();
+        int count = brokenImages.size();
+
+        Assert.assertEquals(count, 0, "Found " + count + " broken images: " + brokenImages);
 
         imageCheck.takeScreenshot("screenshots/homepage_full_check.png");
     }

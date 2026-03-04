@@ -25,12 +25,13 @@ public class WebResponsiveTest extends BaseTest {
     public void testIPhone11VisualValidation() {
         SoftAssert softAssert = new SoftAssert();
         mobileView.navigateToHomePage();
-
+        page.reload();
         softAssert.assertTrue(mobileView.isLogoVisible(), "Logo is NOT visible!");
+        softAssert.assertTrue(mobileView.isProfileIconVisible(), "Error: Profile Icon is NOT visible!");
+        softAssert.assertTrue(mobileView.isProfileIconClickable(), "Error: Profile Icon is overlapped or disabled!");
+        mobileView.scrollThroughPage();
         softAssert.assertFalse(mobileView.isHorizontalScrollPresent(), "Horizontal scroll detected!");
-
         mobileView.takeScreenshot("WebResponsive_Check");
-
         softAssert.assertAll();
     }
 }
