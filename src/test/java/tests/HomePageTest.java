@@ -17,8 +17,8 @@ public class HomePageTest extends BaseTest {
     @BeforeMethod
     public void setupContextAndPages() {
         context = browser.newContext(new Browser.NewContextOptions()
-                .setViewportSize(null)
-                .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"));
+                .setViewportSize(null));
+
         page = context.newPage();
 
         googleSearchPage = new GoogleSearchPage(page);
@@ -57,7 +57,7 @@ public class HomePageTest extends BaseTest {
     }
 
     @Test(priority = 3)
-    public void testImagesIntegrityOnHomepage() {
+    public void testImagesOnHomepage() {
         imageCheck.navigateToHomePage();
         imageCheck.scrollGradually();
 

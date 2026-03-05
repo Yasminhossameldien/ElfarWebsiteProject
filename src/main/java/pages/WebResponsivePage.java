@@ -13,31 +13,18 @@ public class WebResponsivePage extends BasePage {
 
     public void navigateToHomePage() {
         navigateTo("https://mahmoudelfar.com/");
+
         page.waitForLoadState(LoadState.NETWORKIDLE);
-        page.reload();
-        page.waitForLoadState(LoadState.NETWORKIDLE);
-        for (int i = 0; i < 5; i++) {
-            page.evaluate("window.scrollBy(0, window.innerHeight)");
-            page.waitForLoadState(LoadState.NETWORKIDLE);
-        }
+
     }
 
     public boolean isLogoVisible() {
         return page.getByAltText("logo").first().isVisible();
     }
 
-    public boolean isProfileIconVisible() {
-        return page.locator(profileIconSelector).first().isVisible();
-    }
-
     public boolean isProfileIconClickable() {
         return page.locator(profileIconSelector).first().isVisible() &&
                 page.locator(profileIconSelector).first().isEnabled();
-    }
-
-    public void scrollThroughPage() {
-        page.evaluate("window.scrollTo(0, document.body.scrollHeight )");
-        page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
     public boolean isHorizontalScrollPresent() {

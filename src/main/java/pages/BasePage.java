@@ -3,11 +3,7 @@ package pages;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import io.qameta.allure.Allure;
-
 import java.io.ByteArrayInputStream;
-import java.nio.file.Paths;
-
-
 public class BasePage {
     protected Page page;
 
